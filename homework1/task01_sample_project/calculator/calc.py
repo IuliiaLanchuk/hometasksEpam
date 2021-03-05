@@ -14,9 +14,9 @@ Task01.
 
 def check_power_of_2(a: int) -> bool:
     """
-    I'm check is value a power of two.
+    Return True if a value is a power of two.
 
     :param a: input value
     :return: bool
     """
-    return type(a) == int and a != 0 and not (bool(a & (a - 1)))
+    return isinstance(a, int) and a != 0 and not (bool(a & (a - 1)))

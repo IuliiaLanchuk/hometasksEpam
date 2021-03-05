@@ -4,7 +4,6 @@ This is test_calculator.py docstring.
 Here are tests for check_power_of_2 function
 """
 
-
 import pytest
 from calculator.calc import check_power_of_2
 
@@ -22,6 +21,4 @@ from calculator.calc import check_power_of_2
     ],
 )
 def test_power_of_2(value: int, expected_result: bool):
-    actual_result = check_power_of_2(value)
-
-    assert actual_result == expected_result
+    assert check_power_of_2(value) == expected_result
