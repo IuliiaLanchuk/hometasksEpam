@@ -17,12 +17,7 @@ from typing import Tuple
 
 
 def find_maximum_and_minimum(file_name: str) -> Tuple[int, int]:
-    """
-    I'm find min and max values in file.
-
-    :param file_name: input file name
-    :return: tuple of two values
-    """
+    """Return min and max values in file."""
     max_value = 0
     min_value = sys.maxsize
     with open(file_name) as fi:
