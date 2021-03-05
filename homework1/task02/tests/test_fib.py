@@ -1,9 +1,3 @@
-"""
-This is test_fib.py docstring.
-
-Here are tests for check_fibonacci function
-"""
-
 from typing import List
 
 import pytest
@@ -14,38 +8,14 @@ from fibonacci.fibonacci import check_fibonacci
     ("lst", "expected_result"),
     [
         (
-            [
-                0,
-                1,
-                1,
-                2,
-                3,
-                5,
-                8,
-                13,
-                21,
-                34,
-                55,
-                89,
-                144,
-                233,
-                377,
-                610,
-                987,
-                1597,
-                2584,
-                4181,
-                6765,
-            ],
+            [0, 1, 1, 2, 3, 5, 8],
             True,
         ),
         ([], False),
-        ([0, 1, 1, 2, 3, 5, 7, 13, 21, 34, 54, 89, 144], False),
+        ([0, 1, 1, 2, 7], False),
         ([0, 1], True),
         ([2, 4, 6], False),
     ],
 )
 def test_fibonacci(lst: List[int], expected_result: bool):
-    actual_result = check_fibonacci(lst)
-
-    assert actual_result == expected_result
+    assert check_fibonacci(lst) == expected_result

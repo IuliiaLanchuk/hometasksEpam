@@ -17,17 +17,9 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     :param data: input list of integers
     :return: bool
     """
-    fib1 = 0
-    fib2 = 1
-    fib3 = 1
-    lst = [0, 1, 1]
-    if len(data) > 0:
-        if data == [0] or data == [0, 1] or data == [0, 1, 1]:
-            return True
-        else:
-            while fib3 < data[-1]:
-                fib1 = fib2
-                fib2 = fib3
-                fib3 = fib1 + fib2
-                lst.append(fib3)
-    return data == lst
+    counter = 2
+    if len(data) > 0 and data[0] == 0:
+        for i in range(2, len(data)):
+            if data[i] == data[i - 2] + data[i - 1]:
+                counter += 1
+    return counter == len(data)
