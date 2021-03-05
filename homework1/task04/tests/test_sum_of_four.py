@@ -4,7 +4,6 @@ This is test_sum_of_four.py docstring.
 Here are tests for check_sum_of_four function
 """
 
-
 import pytest
 from sum_of_four.task04 import check_sum_of_four
 
@@ -46,6 +45,4 @@ from sum_of_four.task04 import check_sum_of_four
 def test_sum_of_four(
     a: list[int], b: list[int], c: list[int], d: list[int], expected_result: tuple
 ):
-    actual_result = check_sum_of_four(a, b, c, d)
-
-    assert actual_result == expected_result
+    assert check_sum_of_four(a, b, c, d) == expected_result
