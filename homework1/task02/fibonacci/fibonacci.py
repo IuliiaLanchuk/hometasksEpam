@@ -7,21 +7,27 @@ Given a cell with "it's a fib sequence" from slideshow,
 We guarantee, that the given sequence contain >= 0 integers inside.
 """
 
-
-from collections.abc import Sequence
+from typing import Sequence
 
 
 def check_fibonacci(data: Sequence[int]) -> bool:
     """
-    I'm check if sequence if a fibonacci sequence.
+    Return True if sequence is a fibonacci sequence.
 
     :param data: input list of integers
     :return: bool
     """
-    is_fib = len(data) >= 3
-    if is_fib:
-        for i in range(len(data) - 2):
-            if (data[i] + data[i + 1]) != data[i + 2]:
-                is_fib = False
-                break
-    return is_fib
+    fib1 = 0
+    fib2 = 1
+    fib3 = 1
+    lst = [0, 1, 1]
+    if len(data) > 0:
+        if data == [0] or data == [0, 1] or data == [0, 1, 1]:
+            return True
+        else:
+            while fib3 < data[-1]:
+                fib1 = fib2
+                fib2 = fib3
+                fib3 = fib1 + fib2
+                lst.append(fib3)
+    return data == lst

@@ -41,10 +41,11 @@ from fibonacci.fibonacci import check_fibonacci
         ),
         ([], False),
         ([0, 1, 1, 2, 3, 5, 7, 13, 21, 34, 54, 89, 144], False),
-        ([0, 1], False),
+        ([0, 1], True),
+        ([2, 4, 6], False),
     ],
 )
 def test_fibonacci(lst: List[int], expected_result: bool):
     actual_result = check_fibonacci(lst)
 
-    assert actual_result == expected_result, "Invalid data"
+    assert actual_result == expected_result
