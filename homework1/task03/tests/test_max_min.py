@@ -1,10 +1,3 @@
-"""
-This is test_max_min.py docstring.
-
-Here are tests for find_maximum_and_minimum function
-"""
-
-
 import pytest
 from max_min.task03 import find_maximum_and_minimum
 
