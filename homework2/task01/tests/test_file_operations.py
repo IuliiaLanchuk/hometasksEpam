@@ -16,26 +16,26 @@ def test_get_longest_diverse_words():
         "Kollektivschuldiger",
         "Bevölkerungsabschub",
         "Werkstättenlandschaft",
-        "Schicksalsfiguren",
         "Selbstverständlich",
+        "Schicksalsfiguren",
         "vernachlässigt",
         "unverständlich",
-        "pharmazeutischen",
-        "außenpolitisch",
+        "résistanceBewegungen",
+        "politischstrategischen",
     ]
     assert actual_result == expected_result
 
 
 def test_get_rarest_char():
-    assert get_rarest_char(FILE_PATH) == "X"
+    assert get_rarest_char(FILE_PATH) == "›"
 
 
 def test_count_punctuation_chars():
-    assert count_punctuation_chars(FILE_PATH) == 5475
+    assert count_punctuation_chars(FILE_PATH) == 5388
 
 
 def test_count_non_ascii_chars():
-    assert count_non_ascii_chars(FILE_PATH) == 2802
+    assert count_non_ascii_chars(FILE_PATH) == 2886
 
 
 def test_get_most_common_non_ascii_char():
