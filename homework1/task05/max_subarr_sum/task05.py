@@ -7,23 +7,20 @@ Examples:
     nums = [1, 3, -1, -3, 5, 3, 6, 7], k = 3
     result = 16
 """
-
-
+import sys
 from typing import List
 
 
 def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     """
-    I'm find max subarray sum, where k is the length of subarray.
+    Return max subarray sum, where k is the length of subarray.
 
     :param nums: input list of integers, k: input int
     :return: int
     """
-    max_sum = 0
-    for i in range(len(nums)):
-        for j in range(1, k + 1):
-            sub_list = nums[i : i + j]
-            summ = sum(sub_list)
-            if summ > max_sum:
-                max_sum = summ
+    max_sum = -sys.maxsize
+    for i in range(len(nums) - k + 1):
+        summ = sum(nums[i : i + k])
+        if summ > max_sum:
+            max_sum = summ
     return max_sum
