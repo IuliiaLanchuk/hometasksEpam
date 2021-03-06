@@ -18,8 +18,11 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     :return: bool
     """
     counter = 2
-    if len(data) > 0 and data[0] == 0:
+    if data == [0] or data == [0, 1]:
+        return True
+    if len(data) > 2:
         for i in range(2, len(data)):
             if data[i] == data[i - 2] + data[i - 1]:
                 counter += 1
-    return counter == len(data)
+
+    return counter == len(data) != 2 and data[0] == 0

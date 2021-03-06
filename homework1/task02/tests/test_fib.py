@@ -5,17 +5,29 @@ from fibonacci.fibonacci import check_fibonacci
 
 
 @pytest.mark.parametrize(
-    ("lst", "expected_result"),
+    "lst",
     [
-        (
-            [0, 1, 1, 2, 3, 5, 8],
-            True,
-        ),
-        ([], False),
-        ([0, 1, 1, 2, 7], False),
-        ([0, 1], True),
-        ([2, 4, 6], False),
+        [0],
+        [0, 1],
+        [0, 1, 1],
+        [0, 1, 1, 2],
     ],
 )
-def test_fibonacci(lst: List[int], expected_result: bool):
-    assert check_fibonacci(lst) == expected_result
+def test_fib(lst: List[int]):
+    assert check_fibonacci(lst)
+
+
+@pytest.mark.parametrize(
+    "lst",
+    [
+        [],
+        [5],
+        [0, 3],
+        [2, 4, 6],
+        [0, 1, 1, 7],
+    ],
+)
+def test_not_fib(
+    lst: List[int],
+):
+    assert not check_fibonacci(lst)
