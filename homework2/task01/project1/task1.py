@@ -55,11 +55,11 @@ def count_punctuation_chars(file_path: str) -> int:
     """Return the amount of punctuation chars."""
     with open(file_path, "r", encoding="unicode_escape") as f:
         text = f.read()
-        di = dict.fromkeys(set(string.punctuation), 0)
+        all_punctuation = dict.fromkeys(set(string.punctuation), 0)
         for p in text:
-            if p in di:
-                di[p] += 1
-        return sum(di.values())
+            if p in all_punctuation:
+                all_punctuation[p] += 1
+        return sum(all_punctuation.values())
 
 
 def count_non_ascii_chars(file_path: str) -> int:
