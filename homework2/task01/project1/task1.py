@@ -22,7 +22,7 @@ def file_presettings(file_path: str) -> str:
 
 
 def get_unique_word_symbols(i: str) -> (int):
-    """Return amount of unique symbols, first two letters for correct sequence sorting, also alphabetically."""
+    """Return amount of unique symbols."""
     return len("".join(set(i)))
 
 
