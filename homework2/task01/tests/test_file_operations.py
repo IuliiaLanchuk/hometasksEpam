@@ -13,15 +13,15 @@ def test_get_longest_diverse_words():
     actual_result = get_longest_diverse_words(FILE_PATH)
     expected_result = [
         "unmißverständliche",
-        "Kollektivschuldiger",
         "Bevölkerungsabschub",
+        "Kollektivschuldiger",
         "Werkstättenlandschaft",
-        "Selbstverständlich",
         "Schicksalsfiguren",
-        "vernachlässigt",
-        "unverständlich",
-        "résistanceBewegungen",
-        "politischstrategischen",
+        "Selbstverständlich",
+        "Fingerabdrucks",
+        "Friedensabstimmung",
+        "außenpolitisch",
+        "Seinsverdichtungen",
     ]
     assert actual_result == expected_result
 
