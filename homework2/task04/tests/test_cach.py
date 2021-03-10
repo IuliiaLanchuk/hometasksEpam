@@ -1,27 +1,43 @@
-from project4.task4 import cache, function, multiply, operations
+from typing import Callable, Tuple
 
-cache_function = cache(function)
-cache_multiply = cache(multiply)
-cache_operations = cache(operations)
-
-some = 2, 4
-val_1 = cache_function(*some)
-val_4 = cache_function(*some)
-
-val_2 = cache_multiply(*some)
-val_5 = cache_multiply(*some)
-
-val_3 = cache_operations(*some)
-val_6 = cache_operations(*some)
+import pytest
+from project4.task4 import cache
 
 
-def test_func():
-    assert val_1 is val_4
+def function(a: int, b: int) -> int:
+    """Return result of math operation on arguments."""
+    return (a ** b) ** 2
 
 
-def test_multiply():
-    assert val_2 is val_5
+some = [1, 2]
+
+
+def test_func_positive():
+    cache_function = cache(function)
+    assert cache_function(*some) is cache_function(*some)
+
+
+def test_func_negative():
+    cache_function = cache(function)
+    assert cache_function(1, 2) is not cache_function(2, 1)
 
 
 def test_sum():
-    assert val_3 is val_6
+    def summa(*args) -> int:
+        return sum(args)
+
+    cache_function = cache(summa)
+    data = [1, 2]
+    assert cache_function(*data) is cache_function(*data)
+
+
+@pytest.mark.parametrize(
+    ("func", "data", "expected_result"),
+    [
+        ((lambda x, y: x ** y ** 2), (2, 4), True),
+        ((lambda x, y: x + y), [1, 2], True),
+    ],
+)
+def test_cache(func: Callable, data: Tuple[int], expected_result: bool):
+    temp_result = cache(func)
+    assert (temp_result(*data) is temp_result(*data)) == expected_result

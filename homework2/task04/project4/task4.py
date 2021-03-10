@@ -21,21 +21,6 @@ assert val_1 is val_2
 from typing import Callable
 
 
-def function(a: int, b: int) -> int:
-    """Return result of math operation on arguments."""
-    return (a ** b) ** 2
-
-
-def multiply(a: int, b: int) -> int:
-    """Return result of arguments sum."""
-    return a + b
-
-
-def operations(a: int, b: int) -> int:
-    """Return result of math operation on arguments."""
-    return (a + b) // 2
-
-
 def cache(func: Callable) -> Callable:
     """Return function."""
     cache_data = {}
