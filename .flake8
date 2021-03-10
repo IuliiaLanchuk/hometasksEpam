@@ -5,6 +5,8 @@ ignore = E203, E501, W503,  # handled by black
          D200,  # One-line docstring should fit on one line with quotes
          D107,  #  Missing docstring in __init__
          R504,
+         D301,
+         R503,
 
 exclude =
     *_venv
