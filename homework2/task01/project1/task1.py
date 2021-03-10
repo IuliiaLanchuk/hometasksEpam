@@ -44,21 +44,19 @@ def get_rarest_char(file_path: str) -> str:
                 all_chars[i] = 1
             else:
                 all_chars[i] += 1
-        min_value = min(all_chars.values())
-        key_list = list(all_chars.keys())
-        val_list = list(all_chars.values())
-        return key_list[val_list.index(min_value)]
+    return min(all_chars.items(), key=lambda item: item[1])[0]
 
 
 def count_punctuation_chars(file_path: str) -> int:
     """Return the amount of punctuation chars."""
     with open(file_path, "r", encoding="unicode_escape") as f:
         text = f.read()
-        all_punctuation = dict.fromkeys(set(string.punctuation), 0)
+        counter = 0
+        all_punctuation = set(string.punctuation)
         for p in text:
             if p in all_punctuation:
-                all_punctuation[p] += 1
-        return sum(all_punctuation.values())
+                counter += 1
+        return counter
 
 
 def count_non_ascii_chars(file_path: str) -> int:
@@ -66,9 +64,7 @@ def count_non_ascii_chars(file_path: str) -> int:
     text = file_presettings(file_path)
     counter = 0
     for i in text:
-        if 0 <= ord(i) <= 127:
-            continue
-        else:
+        if not i.isascii():
             counter += 1
     return counter
 
@@ -78,13 +74,9 @@ def get_most_common_non_ascii_char(file_path: str) -> str:
     text = file_presettings(file_path)
     non_ascii_chars = {}
     for i in text:
-        if 0 <= ord(i) <= 127:
-            continue
-        else:
+        if not i.isascii():
             if i not in non_ascii_chars:
                 non_ascii_chars[i] = 1
             else:
                 non_ascii_chars[i] += 1
-    for key, value in non_ascii_chars.items():
-        if value == max(non_ascii_chars.values()):
-            return key
+    return max(non_ascii_chars.items(), key=lambda item: item[1])[0]
