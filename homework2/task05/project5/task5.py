@@ -23,11 +23,6 @@ def custom_range(input_data, start, finish=None, step=1):
         if finish is None:
             finish = start
             start = input_data[0]
-        if len(set(input_data)) != len(input_data):
-            raise Exception("Input data have non-unique values")
         for i in input_data[input_data.index(start) : input_data.index(finish) : step]:
             result.append(i)
-    else:
-        raise Exception(start, "No input elements or element is not in list")
-
     return result

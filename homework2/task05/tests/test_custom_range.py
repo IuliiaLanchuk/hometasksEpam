@@ -18,14 +18,3 @@ from project5.task5 import custom_range
 )
 def test_custom_range(value: Sequence, expected_result: Sequence):
     assert custom_range(*value) == expected_result
-
-
-@pytest.mark.parametrize("value", ["klmmmn"])
-def test_custom_range_non_unique_symbols(value):
-    with pytest.raises(Exception, match="Input data have non-unique values"):
-        custom_range(value, "l")
-
-
-def test_custom_range_empty_sequence():
-    with pytest.raises(Exception, match="No input elements or element is not in list"):
-        custom_range([], 0)
