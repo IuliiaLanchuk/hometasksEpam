@@ -17,25 +17,16 @@ Input: [2,2,1,1,1,2,2]
 Output: 2, 1
 
 """
+from collections import defaultdict
 from typing import List, Tuple
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
     """Return the most common and the least common elements from input sequence."""
-    all_elements = {}
-    max_element = ""
-    min_element = ""
+    all_elements = defaultdict(int)
     for i in inp:
-        if i in all_elements:
-            all_elements[i] += 1
-        else:
-            all_elements[i] = 1
-    max_amount = max(all_elements.values())
-    min_amount = min(all_elements.values())
-
-    for key, value in all_elements.items():
-        if value == max_amount:
-            max_element = int(key)
-        if value == min_amount:
-            min_element = int(key)
-    return max_element, min_element
+        all_elements[i] += 1
+    return (
+        max(all_elements.items(), key=lambda item: item[1])[0],
+        min(all_elements.items(), key=lambda item: item[1])[0],
+    )
