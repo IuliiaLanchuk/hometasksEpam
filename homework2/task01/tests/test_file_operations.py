@@ -6,7 +6,7 @@ from project1.task1 import (
     get_rarest_char,
 )
 
-FILE_PATH = "data.txt"
+FILE_PATH = "homework2/task01/tests/data.txt"
 
 
 def test_get_longest_diverse_words():
