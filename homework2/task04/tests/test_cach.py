@@ -1,4 +1,5 @@
-from typing import Callable, Tuple
+from typing import Callable
+from unittest.mock import Mock, call
 
 import pytest
 from project4.task4 import cache
@@ -6,38 +7,47 @@ from project4.task4 import cache
 
 def function(a: int, b: int) -> int:
     """Return result of math operation on arguments."""
-    return (a ** b) ** 2
-
-
-some = [1, 2]
-
-
-def test_func_positive():
-    cache_function = cache(function)
-    assert cache_function(*some) is cache_function(*some)
-
-
-def test_func_negative():
-    cache_function = cache(function)
-    assert cache_function(1, 2) is not cache_function(2, 1)
-
-
-def test_sum():
-    def summa(*args) -> int:
-        return sum(args)
-
-    cache_function = cache(summa)
-    data = [1, 2]
-    assert cache_function(*data) is cache_function(*data)
+    return pow(pow(a, b), 2)
 
 
 @pytest.mark.parametrize(
-    ("func", "data", "expected_result"),
+    "func",
     [
-        ((lambda x, y: x ** y ** 2), (2, 4), True),
-        ((lambda x, y: x + y), [1, 2], True),
+        sum,
+        pow,
+        function,
     ],
 )
-def test_cache(func: Callable, data: Tuple[int], expected_result: bool):
-    temp_result = cache(func)
-    assert (temp_result(*data) is temp_result(*data)) == expected_result
+def test_cache_same_values(func: Callable):
+    some = [2, 4, 7]
+    mock_func = Mock(func)
+    cache_calc_sum_of_values = cache(mock_func)
+
+    cache_calc_sum_of_values(*some)
+    cache_calc_sum_of_values(*some)
+
+    mock_func.assert_called_once()
+
+    actual_result = mock_func.mock_calls
+    assert actual_result == [call((2, 4, 7))]
+
+
+@pytest.mark.parametrize(
+    "func",
+    [
+        sum,
+        pow,
+        function,
+    ],
+)
+def test_cache_different_values(func: Callable):
+    func = Mock(func)
+    cache_calc_sum_of_values = cache(func)
+
+    cache_calc_sum_of_values(2, 4, 7)
+    cache_calc_sum_of_values(2, 4, 8)
+
+    assert func.call_count == 2
+
+    actual_result = func.mock_calls
+    assert actual_result == [call((2, 4, 7)), call((2, 4, 8))]

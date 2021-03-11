@@ -18,17 +18,17 @@ val_2 = cache_func(*some)
 assert val_1 is val_2
 
 """
-from typing import Callable
+from typing import Any, Callable
 
 
 def cache(func: Callable) -> Callable:
     """Return function."""
     cache_data = {}
 
-    def wrapper(*args: int) -> int:
+    def wrapper(*args: Any) -> Any:
         """Return cache data."""
         if args not in cache_data:
-            cache_data[args] = func(*args)
-        return cache_data[args]
+            cache_data[args] = func(args)
+        return args, cache_data.get(args)
 
     return wrapper
