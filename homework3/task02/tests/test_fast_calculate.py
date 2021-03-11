@@ -1,6 +1,6 @@
 from time import perf_counter
 
-from homework3.task02.project2.task2 import fast_calculate
+from project_fast_calculate.task2_fast_calculate import fast_calculate
 
 
 def test_fast_calculate():
