@@ -1,5 +1,5 @@
 import pytest
-from project1.task1 import cache
+from project_cache.task1cache import cache
 
 
 @cache(times=2)
