@@ -1,12 +1,16 @@
 [flake8]
 ignore = E203, E501, W503,  # handled by black
-         ANN101, ANN204,
+         ANN101, ANN204, ANN201, ANN001,
          D104,  # no docstring in public package
          D200,  # One-line docstring should fit on one line with quotes
          D107,  #  Missing docstring in __init__
          R504,
          D301,
          R503,
+         D401,
+         S303,
+         S311
+
 
 exclude =
     *_venv
