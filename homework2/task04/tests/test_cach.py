@@ -35,4 +35,9 @@ def test_cache_sum():
     some1 = [1, 2]
     some2 = [1, 3]
     cache_calc_sum_of_values = cache(sum)
-    assert cache_calc_sum_of_values(*some1) != cache_calc_sum_of_values(*some2)
+    assert cache_calc_sum_of_values(*some1) is not cache_calc_sum_of_values(*some2)
+
+
+def test_cache_sum_reversed_args():
+    cache_function = cache(sum)
+    assert cache_function(1, 2) is not cache_function(2, 1)
