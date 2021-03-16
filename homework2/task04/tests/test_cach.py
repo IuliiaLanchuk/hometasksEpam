@@ -32,10 +32,9 @@ def test_cache_different_values_func_called_several_times():
 
 
 def test_cache_sum():
-    some1 = [1, 2]
-    some2 = [1, 3]
+    some = [1, 2]
     cache_calc_sum_of_values = cache(sum)
-    assert cache_calc_sum_of_values(*some1) is not cache_calc_sum_of_values(*some2)
+    assert cache_calc_sum_of_values(*some) == cache_calc_sum_of_values(*some)
 
 
 def test_cache_sum_reversed_args():
