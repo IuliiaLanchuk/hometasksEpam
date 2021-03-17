@@ -22,7 +22,11 @@ from typing import Generator
 
 
 def fizzbuzz(n: int) -> Generator:
-    def fizz_buzz_generation(x: int) -> (int, str):
+    """Return a generator that yields n FizzBuzz numbers."""
+
+    def fizz_buzz_generation(x: int) -> str:
+        """Return "fizz" if x is divided by 3 or "buzz" if x id divided by 5 or
+        "fizz buzz" if x is divided by 15 or x."""
         return (
             "fizz buzz" * (x % 15 == 0)
             or "fizz" * (x % 3 == 0)
