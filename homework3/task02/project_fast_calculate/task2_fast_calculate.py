@@ -23,5 +23,4 @@ def slow_calculate(value):
 def fast_calculate():
     """Return sum of slow_calculate() of all numbers starting from 0 to 500."""
     with Pool(processes=60) as pool:
-        result = sum(pool.map(slow_calculate, range(501)))
-        return result
+        return sum(pool.map(slow_calculate, range(501)))
