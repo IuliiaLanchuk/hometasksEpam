@@ -27,8 +27,9 @@ def cache(func: Callable) -> Callable:
 
     def wrapper(*args: Any) -> Any:
         """Return cache data."""
-        if args not in cache_data:
-            cache_data[args] = func(args)
-        return args, cache_data.get(args)
+        str_args = str(args)
+        if str_args not in cache_data:
+            cache_data[str_args] = func(*args)
+        return args, cache_data.get(str_args)
 
     return wrapper
