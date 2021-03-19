@@ -24,7 +24,4 @@ from functools import reduce
 def is_armstrong(number: int) -> bool:
     """Return True if a number is Armstrong number."""
     power = len(str(number))
-    result = reduce(
-        lambda x, y: x + (y ** power), list(map(int, (i for i in str(number))))
-    )
-    return result == number
+    return reduce(lambda x, y: x + (y ** power), map(int, str(number))) == number
