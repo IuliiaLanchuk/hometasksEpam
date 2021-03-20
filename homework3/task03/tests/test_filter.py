@@ -9,15 +9,15 @@ def test_apply_positive_even():
 
 
 def test_apply_sum_with_7_is_zero():
-    sum_with_7_is_zero = Filter(lambda a: a != 0, lambda a: a + 7 == 0)
+    sum_with_7_is_zero = Filter(lambda a: a + 7 == 0)
     assert sum_with_7_is_zero.apply([-7, 13, 6.8, 9, 0]) == [-7]
 
 
-def test_apply_no_data_to_filter():
+def test_filter_of_empty_list_returns_empty_list():
     assert Filter().apply([]) == []
 
 
-def test_apply_no_filtering_functions():
+def test_empty_filter_returns_all_items():
     assert Filter().apply(range(5)) == [0, 1, 2, 3, 4]
 
 
