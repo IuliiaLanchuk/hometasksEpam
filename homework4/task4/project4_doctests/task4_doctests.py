@@ -29,7 +29,6 @@ You will learn:
 * https://en.wikipedia.org/wiki/Fizz_buzz
 ** Энциклопедия профессора Фортрана page 14, 15, "Робот Фортран, чисть картошку!"
 """
-import doctest
 from typing import List
 
 
@@ -66,4 +65,7 @@ def fizzbuzz(n: int) -> List[str]:
         ]
 
 
-doctest.testmod()
+if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod()
