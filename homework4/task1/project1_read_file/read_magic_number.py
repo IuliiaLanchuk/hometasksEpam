@@ -27,7 +27,7 @@ You will learn:
 
 
 def read_magic_number(path: str) -> bool:
-    """Return True if in first line there is a number in an interval [1, 3)* and False otherwise."""
+    """Return True if in first line there is a number in an interval [1, 3) and False otherwise."""
     with open(path, "r") as file:
         first_line = file.readline()
         try:
