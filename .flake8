@@ -6,6 +6,7 @@ ignore = E203, E501, W503,  # handled by black
          D107,  #  Missing docstring in __init__
          D301,
          R503,
+         T001
 
 exclude =
     *_venv
