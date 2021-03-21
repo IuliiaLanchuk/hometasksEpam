@@ -15,6 +15,7 @@ def test_my_precious_logger_positive(capsys, string, expected_result):
     result = capsys.readouterr()
 
     assert result.out == expected_result
+    assert result.err == ""
 
 
 def test_my_precious_logger_error(capsys):
@@ -22,3 +23,4 @@ def test_my_precious_logger_error(capsys):
     result = capsys.readouterr()
 
     assert "error" in result.err
+    assert result.out == ""
