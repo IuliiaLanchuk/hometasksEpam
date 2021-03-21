@@ -25,34 +25,24 @@ def test_one_key_value_pair_repeats_in_different_team_members():
     team = [
         {
             "name": "Iuliia",
-            "last_name": "Lanchuk",
-            "hobby": "swimming",
             "type": "human",
         },
         {
             "name": "Barsik",
-            "color": "black",
-            "occupation": "was here",
             "type": "cat",
         },
         {
             "name": "Evgenii",
-            "last_name": "Mukhailov",
-            "hobby": "swimming",
             "type": "human",
         },
     ]
     assert make_filter(**{"type": "human"}).apply(team) == [
         {
             "name": "Iuliia",
-            "last_name": "Lanchuk",
-            "hobby": "swimming",
             "type": "human",
         },
         {
             "name": "Evgenii",
-            "last_name": "Mukhailov",
-            "hobby": "swimming",
             "type": "human",
         },
     ]
@@ -62,20 +52,14 @@ def test_no_such_key():
     team = [
         {
             "name": "Iuliia",
-            "last_name": "Lanchuk",
-            "hobby": "swimming",
             "type": "human",
         },
         {
             "name": "Barsik",
-            "color": "black",
-            "occupation": "was here",
             "type": "cat",
         },
         {
             "name": "Evgenii",
-            "last_name": "Mukhailov",
-            "hobby": "swimming",
             "type": "human",
         },
     ]
@@ -86,21 +70,15 @@ def test_no_such_value():
     team = [
         {
             "name": "Iuliia",
-            "last_name": "Lanchuk",
             "hobby": "swimming",
-            "type": "human",
         },
         {
             "name": "Barsik",
-            "color": "black",
-            "occupation": "was here",
             "type": "cat",
         },
         {
             "name": "Evgenii",
-            "last_name": "Mukhailov",
             "hobby": "swimming",
-            "type": "human",
         },
     ]
     assert make_filter(**{"hobby": "dancing"}).apply(team) == []
