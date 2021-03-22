@@ -42,10 +42,9 @@ from typing import Any
 class Homework:
     """Create Homework objects."""
 
-    def __init__(self, text: str, deadline: int) -> None:
-        """Creates a class instance."""
+    def __init__(self, text: str, days_to_deadline: int) -> None:
         self.text = text
-        self.deadline = datetime.timedelta(deadline)
+        self.deadline = datetime.timedelta(days=days_to_deadline)
         self.created = datetime.datetime.now()
 
     def is_active(self) -> bool:
@@ -84,29 +83,5 @@ class Teacher:
 
     @staticmethod
     def create_homework(task: str, days_to_do_task: int) -> Homework:
-        """Creates an instance of the Homework class object.
-
-        Return Homework class object.
-        """
+        """Creates an instance of the Homework class object."""
         return Homework(task, days_to_do_task)
-
-
-if __name__ == "__main__":
-    teacher = Teacher("Daniil", "Shadrin")
-    student = Student("Roman", "Petrov")
-    teacher.last_name  # Daniil
-    student.first_name  # Petrov
-
-    expired_homework = teacher.create_homework("Learn functions", 0)
-    expired_homework.created  # Example: 2019-05-26 16:44:30.688762
-    expired_homework.deadline  # 0:00:00
-    expired_homework.text  # 'Learn functions'
-    expired_homework.is_active()  # False
-
-    # create function from method and use it
-    create_homework_too = teacher.create_homework
-    oop_homework = create_homework_too("create 2 simple classes", 5)
-    oop_homework.deadline  # 5 days, 0:00:00
-
-    student.do_homework(oop_homework)
-    student.do_homework(expired_homework)  # You are late
