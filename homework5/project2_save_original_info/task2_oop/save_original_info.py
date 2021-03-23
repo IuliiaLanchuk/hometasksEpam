@@ -33,7 +33,6 @@ def save_func_info(func: Callable) -> Callable:
 
 
 def print_result(func):
-    # Place for new decorator
     @save_func_info(func)
     def wrapper(*args, **kwargs):
         """Function-wrapper which print result of an original function"""
