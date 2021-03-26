@@ -34,20 +34,20 @@ def cache(times: int) -> Callable:
     :times: quantity of returned cached values
     """
 
-    def wrapper(func: Callable) -> Any:
-        current_time = 0
-        cash_data = None
+    def wrapper(func: Callable) -> Callable:
+        cache_data = {}
+        if times < 1:
+            raise ValueError("Times value should be positive")
 
-        def wrapped(*args: int, **kwargs: int) -> Any:
-            nonlocal current_time, cash_data
-            if current_time > 0:
-                current_time -= 1
-                return cash_data
+        def cache_with_time_counter(*args: Any) -> Any:
+            if args in cache_data and cache_data[args][1] != 0:
+                cache_data[args][1] -= 1
+                return cache_data[args][0]
             else:
-                cash_data = func(*args, **kwargs)
-                current_time = times
-                return cash_data
+                func_output_value = func(*args)
+                cache_data[args] = [func_output_value, times]
+                return func_output_value
 
-        return wrapped
+        return cache_with_time_counter
 
     return wrapper

@@ -9,8 +9,8 @@ ignore = E203, E501, W503,  # handled by black
          R503,
          D401,
          S303,
-         S311
-
+         S311,
+         T001
 
 exclude =
     *_venv
