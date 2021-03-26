@@ -1,4 +1,4 @@
-from oop2_exceptions.oop2_exc import instances_counter
+from project1_counter.instance_counter import instances_counter
 
 
 @instances_counter
