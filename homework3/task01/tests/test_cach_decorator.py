@@ -40,22 +40,25 @@ def test_cache_func_times_is_2_with_6_value_after_4th_func_call_cache_was_cleare
     assert captured.out == "6\n6\n"
 
 
-def test_cache_func_with_mock_after_4th_func_call_cache_was_cleared(capsys):
-    @cache(times=3)
-    def foo(*arg):
-        return arg
+def test_cache_func_with_mock_func_was_called_once():
+    spy = Mock()
+    function = cache(times=3)(spy)
+    function(1), function(1), function(1), function(1)
 
-    a, b, c, d, f = foo(Mock), foo(Mock), foo(Mock), foo(Mock), foo(Mock)
+    spy.assert_called_once()
 
-    assert a is b
-    assert b is c
-    assert c is d
-    assert d is not f
+
+def test_cache_func_with_mock_func_was_called_twice():
+    spy = Mock()
+    function = cache(times=3)(spy)
+    function(1), function(1), function(1), function(1), function(1)
+
+    assert spy.call_count == 2
 
 
 def test_cache_with_0_times_exception():
     def func(arg):
         return arg
 
-    with pytest.raises(ValueError, match="Times value should be more than zero"):
+    with pytest.raises(ValueError, match="Times value should be positive"):
         cache(times=0)(func(9))

@@ -37,17 +37,17 @@ def cache(times: int) -> Callable:
     def wrapper(func: Callable) -> Callable:
         cache_data = {}
         if times < 1:
-            raise ValueError("Times value should be more than zero")
+            raise ValueError("Times value should be positive")
 
-        def timer(*args: Any) -> Any:
-            if args in cache_data and cache_data[args][1] < times:
-                cache_data[args][1] += 1
+        def cache_with_time_counter(*args: Any) -> Any:
+            if args in cache_data and cache_data[args][1] != 0:
+                cache_data[args][1] -= 1
                 return cache_data[args][0]
             else:
                 func_output_value = func(*args)
-                cache_data[args] = [func_output_value, 0]
+                cache_data[args] = [func_output_value, times]
                 return func_output_value
 
-        return timer
+        return cache_with_time_counter
 
     return wrapper
