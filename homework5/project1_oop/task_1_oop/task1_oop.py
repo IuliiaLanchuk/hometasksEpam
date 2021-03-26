@@ -40,7 +40,7 @@ from typing import Any
 
 
 class Homework:
-    """Create Homework objects."""
+    """Create Homework object"""
 
     def __init__(self, text: str, days_to_deadline: int) -> None:
         self.text = text
@@ -56,7 +56,7 @@ class Homework:
 
 
 class Student:
-    """Create Student objects."""
+    """Create Student object"""
 
     def __init__(self, last_name: str, first_name: str) -> None:
         self.last_name = last_name
@@ -75,7 +75,7 @@ class Student:
 
 
 class Teacher:
-    """Create Teacher objects."""
+    """Create Teacher object"""
 
     def __init__(self, last_name: str, first_name: str) -> None:
         self.last_name = last_name
