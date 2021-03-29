@@ -7,27 +7,31 @@ Tree can only contains basic structures like:
 """
 from typing import Any, Iterable, Iterator, Mapping
 
+occurrences = 0
 
-def recursively_read(tree: Iterable, element, occurrences: list):
+
+def recursively_read(tree: Iterable, element) -> int:
+    global occurrences
     iterator: Iterator
     if isinstance(tree, Mapping):
         iterator = iter(tree.values())
     else:
         iterator = iter(tree)
     while True:
-        try:
-            next_element = next(iterator)
-            if isinstance(next_element, Iterable) and not isinstance(
-                next_element, (str, bytes, bytearray)
-            ):
-                recursively_read(next_element, element, occurrences)
-            if next_element == element:
-                occurrences[0] += 1
-        except StopIteration:
+        next_element = next(iterator, None)
+        if isinstance(next_element, Iterable) and not isinstance(
+            next_element, (str, bytes, bytearray)
+        ):
+            recursively_read(next_element, element)
+        if next_element == element:
+            occurrences += 1
+        if next_element is None:
             break
 
-    return occurrences[0]
+    return occurrences
 
 
 def find_occurrences(tree: dict, element: Any) -> int:
-    return recursively_read(tree, element, [0])
+    global occurrences
+    occurrences = 0
+    return recursively_read(tree, element)

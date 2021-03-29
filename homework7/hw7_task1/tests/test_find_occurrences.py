@@ -10,11 +10,12 @@ example_tree = {
         "jhl": "RED",
         "some": {"nested_key": "RED"},
         "complex_key": {
-            "key1": "value1",
+            "key1": bytearray(b"hello world!"),
             "key2": "RED",
             "key3": [
                 ",",
                 2,
+                b"hahahahah",
                 "of",
                 "values",
                 {"nested_key": "RED", "key7": ("BLUE", 7)},
@@ -54,9 +55,17 @@ def test_find_occurrences_of_bool():
     assert find_occurrences(example_tree, True) == 2
 
 
-def test_find_occurrences_in_empty_list():
+def test_find_occurrences_in_empty_tree():
     assert find_occurrences({}, "a") == 0
 
 
 def test_find_occurrences_no_element():
     assert find_occurrences(example_tree, "") == 0
+
+
+def test_find_occurrences_of_bytes():
+    assert find_occurrences(example_tree, b"hahahahah") == 1
+
+
+def test_find_occurrences_of_bytearray():
+    assert find_occurrences(example_tree, bytearray(b"hello world!")) == 1
