@@ -24,17 +24,10 @@ def test_user_class_create_instances_and_reset_instance():
     assert user.reset_instances_counter() == 3
 
 
-def test_user_create_instances_reset_and_then_check_instances_amount():
+def test_reset_instances_amount_to_zero():
     user, _ = User(), User()
     assert user.reset_instances_counter() == 2
     assert user.get_created_instances() == 0
-
-
-def test_automobile_class_create_and_reset_instance():
-    assert Automobile.get_created_instances() == 0
-    automobile = Automobile(2005)
-    assert automobile.get_created_instances() == 1
-    assert automobile.reset_instances_counter() == 1
 
 
 def test_automobile_class_attributes_and_methods_do_not_change():
