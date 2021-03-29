@@ -15,22 +15,22 @@ def instances_counter(cls):
     class ClassHelper(cls):
         """Adds two additional methods to parent class to count created instances and reset this counter."""
 
-        instances_amount = 0
+        __instances_amount = 0
 
         def __init__(self, *args):
             super().__init__(*args)
-            self.__class__.instances_amount += 1
+            self.__class__.__instances_amount += 1
 
         @classmethod
         def get_created_instances(cls) -> int:
             """Return amount of instances created in sent class."""
-            return cls.instances_amount
+            return cls.__instances_amount
 
         @classmethod
         def reset_instances_counter(cls) -> int:
             """Return amount of instances created in sent class before amount reset."""
             to_return = cls.get_created_instances()
-            cls.instances_amount = 0
+            cls.__instances_amount = 0
             return to_return
 
     return ClassHelper

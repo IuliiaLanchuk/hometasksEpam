@@ -8,7 +8,7 @@ class User:
 
 @instances_counter
 class Automobile:
-    color = "black"
+    instances_amount = "black"
 
     def __init__(self, year):
         self.year = year
@@ -39,6 +39,6 @@ def test_automobile_class_create_and_reset_instance():
 
 def test_automobile_class_attributes_and_methods_do_not_change():
     opel_astra = Automobile(1998)
-    assert opel_astra.color == "black"
+    assert opel_astra.instances_amount == "black"
     assert opel_astra.some_method() == 1998
     assert opel_astra.get_created_instances() == 1
