@@ -16,7 +16,7 @@ exclude =
     *_venv
     venv_*
 max-complexity = 10
-max-cognitive-complexity = 11
+max-cognitive-complexity = 10
 per-file-ignores =
     # No docs and annotation required for tests
     test*.py: D10, D101, D103, S101, ANN
