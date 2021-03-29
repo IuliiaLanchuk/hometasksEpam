@@ -22,16 +22,17 @@ def handle_with_backspaces(string: str) -> list:
     """
 
     backspace = "#"
-    backspaces_amount = string.count(backspace)
     symbols = list(string)
+    stack = []
 
-    for i in range(backspaces_amount):
-        index_backspace = symbols.index(backspace)
-        del symbols[index_backspace]
-        if index_backspace != 0:
-            del symbols[index_backspace - 1]
+    for s in symbols:
+        if s == backspace:
+            if len(stack):
+                stack.pop()
+        else:
+            stack.append(s)
 
-    return symbols
+    return stack
 
 
 def backspace_compare(first: str, second: str) -> bool:
