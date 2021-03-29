@@ -32,8 +32,8 @@ def tic_tac_toe_checker(board: List[List]) -> str:
     all_possible_variants = board
     diag_from_left = [item[i] for i, item in enumerate(board)]
     diag_from_right = [item[-i - 1] for i, item in enumerate(board)]
-    rows = [list(item) for item in list(zip(*board))]
-    all_possible_variants.extend(rows)
+    columns = [list(item) for item in zip(*board)]
+    all_possible_variants.extend(columns)
     all_possible_variants.extend([diag_from_left, diag_from_right])
 
     if ["o", "o", "o"] in all_possible_variants:
