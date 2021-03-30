@@ -22,10 +22,9 @@ def handle_with_backspaces(string: str) -> list:
     """
 
     backspace = "#"
-    symbols = list(string)
     stack = []
 
-    for s in symbols:
+    for s in string:
         if s == backspace:
             if len(stack):
                 stack.pop()
