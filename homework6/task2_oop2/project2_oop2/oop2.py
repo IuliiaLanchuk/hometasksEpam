@@ -44,7 +44,7 @@ PEP8 соблюдать строго.
 """
 import datetime
 from collections import defaultdict
-from typing import Union
+from typing import Any
 
 
 class Homework:
@@ -66,15 +66,27 @@ class Homework:
 class DeadlineError(Exception):
     """Raise when homework is inactive when its deadline has already ended."""
 
-    pass
 
-
-class NameSurnameCreation:
+class Person:
     """Create an instance of a person. Base class for Student and Teacher classes."""
 
     def __init__(self, first_name: str, last_name: str):
         self.first_name = first_name
         self.last_name = last_name
+
+
+class Student(Person):
+    """Create Student object."""
+
+    def do_homework(self, home_work: Homework, result: str) -> Any:
+        """Checks is the deadline of the given homework expired or not.
+
+        Return HomeworkResult class object if deadline hasn't expired yet, otherwise raise DeadlineError.
+        """
+        if home_work.is_active():
+            return HomeworkResult(self, home_work, result)
+        else:
+            raise DeadlineError("You are late")
 
 
 class HomeworkResult:
@@ -83,39 +95,20 @@ class HomeworkResult:
     Raise HomeworkError if a given homework is not a Homework class object.
     """
 
-    def __init__(self, homework: Homework, solution: str) -> None:
+    def __init__(self, author: Student, homework: Homework, hw_result: str) -> None:
         if not isinstance(homework, Homework):
             raise HomeworkTypeError("You gave not a Homework object")
-        self.author = Student
+        self.author = author
         self.homework = homework
-        self.solution = solution
+        self.solution = hw_result
         self.created = datetime.datetime.now()
-
-
-class Student(NameSurnameCreation):
-    """Create Student object."""
-
-    @staticmethod
-    def do_homework(
-        home_work: Homework, result: str
-    ) -> Union[HomeworkResult, DeadlineError]:
-        """Checks is the deadline of the given homework expired or not.
-
-        Return HomeworkResult class object if deadline hasn't expired yet, otherwise raise DeadlineError.
-        """
-        if home_work.is_active():
-            return HomeworkResult(home_work, result)
-        else:
-            raise DeadlineError("You are late")
 
 
 class HomeworkTypeError(Exception):
     """Raise if a given homework in HomeworkResult constructor is not a Homework class object."""
 
-    pass
 
-
-class Teacher(NameSurnameCreation):
+class Teacher(Person):
     """Create Teacher object.
 
     Has class attribute - homework_done, which is a data structure with dictionary interface. All HomeworkResult
