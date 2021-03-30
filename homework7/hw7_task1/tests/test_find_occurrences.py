@@ -69,3 +69,9 @@ def test_find_occurrences_of_bytes():
 
 def test_find_occurrences_of_bytearray():
     assert find_occurrences(example_tree, bytearray(b"hello world!")) == 1
+
+
+def test_find_occurrences_of_none_elements():
+    tree = {"empty_list": [], "zero": 0, "none": None}
+    assert find_occurrences(tree, []) == 1
+    assert find_occurrences(tree, 0) == 1

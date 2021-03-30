@@ -5,17 +5,18 @@ of this element in the tree.
 Tree can only contains basic structures like:
     str, list, tuple, dict, set, int, bool
 """
-from typing import Any, Iterable, Iterator, Mapping
+from typing import Any, Iterable, Mapping
 
 
 def recursively_read(tree: Iterable, element) -> int:
     occurrences = 0
-    iterator: Iterator
     if isinstance(tree, Mapping):
         iterator = iter(tree.values())
     else:
         iterator = iter(tree)
-    while next_element := next(iterator, None):
+
+    sentinel = object()
+    while (next_element := next(iterator, sentinel)) != sentinel:
         if isinstance(next_element, Iterable) and not isinstance(
             next_element, (str, bytes, bytearray)
         ):
