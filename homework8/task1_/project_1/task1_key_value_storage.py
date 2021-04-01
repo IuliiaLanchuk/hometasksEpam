@@ -48,7 +48,7 @@ class KeyValueStorage:
         object.__setattr__(self, name, value)
 
     def __getattr__(self, item):
-        return self.__dict__[item]
+        return object.__getattribute__(self, item)
 
     def __setitem__(self, item, value) -> None:
         self.__dict__[item] = value
