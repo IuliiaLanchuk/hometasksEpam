@@ -20,10 +20,10 @@ calls completely. Use supplied example.sqlite file as database fixture file.
 """
 
 import sqlite3
-from typing import Callable, Iterator
+from typing import Callable, Iterator, Mapping
 
 
-class TableData:
+class TableData(Mapping):
     def __init__(self, database_name: str, table_name: str) -> None:
         self.database_name = database_name
         self.table_name = table_name
@@ -44,14 +44,14 @@ class TableData:
         )
 
     def __getitem__(self, item: str) -> tuple:
-        return self.execute_query(
+        execution = self.execute_query(
             "SELECT * FROM '{}' WHERE name = '{}'",
             (self.table_name, item),
             lambda cursor: cursor.fetchone(),
         )
-
-    def __contains__(self, item: str) -> bool:
-        return self.__getitem__(item) is not None
+        if not execution:
+            raise KeyError
+        return execution
 
     def __iter__(self) -> Iterator:
         return self.execute_query(

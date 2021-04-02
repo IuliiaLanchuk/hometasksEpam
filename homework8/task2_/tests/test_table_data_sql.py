@@ -17,7 +17,8 @@ def test_data_return_from_database_by_name(presidents):
 
 
 def test_no_such_name_in_table(presidents):
-    assert presidents["Putin"] is None
+    with pytest.raises(KeyError):
+        assert presidents["Putin"]
 
 
 def test_amount_of_lines_in_table(presidents):
@@ -33,8 +34,6 @@ def test_name_not_in_database_table(presidents):
 
 
 def test_iterator_protocol_implementation(presidents):
-    all_names = []
-    for president in presidents:
-        all_names.append(president[0])
+    all_names = [president[0] for president in presidents]
 
     assert all_names == ["Yeltsin", "Trump", "Big Man Tyrone"]
