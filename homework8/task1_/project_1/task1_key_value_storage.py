@@ -24,7 +24,7 @@ be raised. File size is expected to be small, you are permitted to read it entir
 """
 
 
-class KeyValueStorage:
+class KeyValueStorage(dict):
     def check_key(self, key):
         if key in self.__dir__():
             raise NameError(
@@ -32,26 +32,19 @@ class KeyValueStorage:
             )
         if not key.isidentifier():
             raise ValueError("This name cannot be assigned as an attribute name")
-        return key
 
     def __init__(self, path: str):
-        self.__path = path
-        with open(self.__path, "r") as f:
+        super().__init__()
+
+        with open(path, "r") as f:
             for line in f:
                 key, value = line.rstrip().split("=")
                 self.check_key(key)
                 if value.isdigit():
                     value = int(value)
-                self.__dict__[key] = value
-
-    def __setattr__(self, name, value):
-        object.__setattr__(self, name, value)
+                self[key] = value
 
     def __getattr__(self, item):
-        return object.__getattribute__(self, item)
-
-    def __setitem__(self, item, value) -> None:
-        self.__dict__[item] = value
-
-    def __getitem__(self, item):
-        return self.__dict__[item]
+        if item in self.keys():
+            return self[item]
+        super().__getattribute__(item)
