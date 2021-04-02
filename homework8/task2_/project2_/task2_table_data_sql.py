@@ -28,10 +28,10 @@ class TableData:
         self.database_name = database_name
         self.table_name = table_name
 
-    def execute_query(self, query: str, f: tuple, fetch: Callable):
+    def execute_query(self, query: str, query_args: tuple, fetch: Callable):
         connection = sqlite3.connect(self.database_name)
         cursor = connection.cursor()
-        cursor.execute(query.format(*f))
+        cursor.execute(query.format(*query_args))
         result = fetch(cursor)
         connection.close()
         return result
