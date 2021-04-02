@@ -20,7 +20,7 @@ calls completely. Use supplied example.sqlite file as database fixture file.
 """
 
 import sqlite3
-from typing import Iterator
+from typing import Callable, Iterator
 
 
 class TableData:
@@ -28,27 +28,34 @@ class TableData:
         self.database_name = database_name
         self.table_name = table_name
 
-    def __connect_to_database(self, query: str):
-        with sqlite3.connect(self.database_name) as connection:
-            cursor = connection.cursor()
-            return cursor.execute(query.format(self.table_name))
+    def execute_query(self, query: str, f: tuple, fetch: Callable):
+        connection = sqlite3.connect(self.database_name)
+        cursor = connection.cursor()
+        cursor.execute(query.format(*f))
+        result = fetch(cursor)
+        connection.close()
+        return result
 
     def __len__(self) -> int:
-        return self.__connect_to_database(query="SELECT count(*) FROM {}").fetchone()[0]
+        return self.execute_query(
+            "SELECT count(*) FROM '{}'",
+            (self.table_name,),
+            lambda cursor: cursor.fetchone()[0],
+        )
 
     def __getitem__(self, item: str) -> tuple:
-        data = self.__connect_to_database(query="SELECT * FROM {}")
-        for line in data:
-            if line[0] == item:
-                return line
-        raise KeyError("Item is not in database")
+        return self.execute_query(
+            "SELECT * FROM '{}' WHERE name = '{}'",
+            (self.table_name, item),
+            lambda cursor: cursor.fetchone(),
+        )
 
     def __contains__(self, item: str) -> bool:
-        data = self.__connect_to_database(query="SELECT * FROM {}")
-        for line in data:
-            if line[0] == item:
-                return True
-        return False
+        return self.__getitem__(item) is not None
 
     def __iter__(self) -> Iterator:
-        return self.__connect_to_database(query="SELECT * FROM {}")
+        return self.execute_query(
+            "SELECT * FROM '{}'",
+            (self.table_name,),
+            lambda cursor: iter(cursor.fetchall()),
+        )

@@ -16,9 +16,8 @@ def test_data_return_from_database_by_name(presidents):
     assert presidents["Yeltsin"] == ("Yeltsin", 999, "Russia")
 
 
-def test_data_not_returned_from_database_by_not_existing_name(presidents):
-    with pytest.raises(KeyError, match="Item is not in database"):
-        assert presidents["Putin"]
+def test_no_such_name_in_table(presidents):
+    assert presidents["Putin"] is None
 
 
 def test_amount_of_lines_in_table(presidents):
@@ -34,9 +33,8 @@ def test_name_not_in_database_table(presidents):
 
 
 def test_iterator_protocol_implementation(presidents):
+    all_names = []
     for president in presidents:
-        assert president in [
-            ("Yeltsin", 999, "Russia"),
-            ("Trump", 1337, "US"),
-            ("Big Man Tyrone", 101, "Kekistan"),
-        ]
+        all_names.append(president[0])
+
+    assert all_names == ["Yeltsin", "Trump", "Big Man Tyrone"]
