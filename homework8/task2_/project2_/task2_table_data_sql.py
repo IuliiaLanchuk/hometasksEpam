@@ -28,12 +28,18 @@ class TableData(Mapping):
         self.database_name = database_name
         self.table_name = table_name
 
+    def __enter__(self):
+        self.connection = sqlite3.connect(self.database_name)
+        self.cursor = self.connection.cursor()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.connection.cursor().close()
+        self.connection.close()
+
     def execute_query(self, query: str, query_args: tuple, fetch: Callable):
-        connection = sqlite3.connect(self.database_name)
-        cursor = connection.cursor()
-        cursor.execute(query.format(*query_args))
-        result = fetch(cursor)
-        connection.close()
+        self.cursor.execute(query.format(*query_args))
+        result = fetch(self.cursor)
         return result
 
     def __len__(self) -> int:
