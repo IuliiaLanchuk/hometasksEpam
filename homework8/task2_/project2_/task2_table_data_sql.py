@@ -39,16 +39,16 @@ class TableData(Mapping):
 
     def __len__(self) -> int:
         return self.cursor.execute(
-            f"SELECT count(*) FROM '{self.table_name}'"
+            f"SELECT count(*) FROM {self.table_name}"
         ).fetchone()[0]
 
     def __getitem__(self, item: str) -> tuple:
         execution = self.cursor.execute(
-            f"SELECT * FROM '{self.table_name}' WHERE name = '{item}'"
+            f"SELECT * FROM {self.table_name} WHERE name = ?", (item,)
         ).fetchone()
         if not execution:
             raise KeyError
         return execution
 
     def __iter__(self) -> Iterator:
-        return iter(self.cursor.execute(f"SELECT * FROM '{self.table_name}'"))
+        return iter(self.cursor.execute(f"SELECT * FROM {self.table_name}"))
