@@ -38,9 +38,7 @@ class TableData(Mapping):
         self.connection.close()
 
     def execute_query(self, query: str, query_args: tuple, fetch: Callable):
-        self.cursor.execute(query.format(*query_args))
-        result = fetch(self.cursor)
-        return result
+        return fetch(self.cursor.execute(query.format(*query_args)))
 
     def __len__(self) -> int:
         return self.execute_query(

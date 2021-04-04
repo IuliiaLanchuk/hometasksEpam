@@ -33,6 +33,11 @@ def test_name_in_database_table(presidents):
         assert "Trump" in presidents
 
 
+def test_fails_since_no_context_manager(presidents):
+    with pytest.raises(AttributeError):
+        assert "Trump" in presidents
+
+
 def test_name_not_in_database_table(presidents):
     with presidents:
         assert "Putin" not in presidents
