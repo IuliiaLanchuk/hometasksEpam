@@ -30,7 +30,7 @@ def test_reset_instances_amount_to_zero():
     assert user.get_created_instances() == 0
 
 
-def test_automobile_class_attributes_and_methods_do_not_change():
+def test_automobile_class_intricate_attributes_and_methods_do_not_change():
     opel_astra = Automobile(1998)
     assert opel_astra.instances_amount == "black"
     assert opel_astra.some_method() == 1998
