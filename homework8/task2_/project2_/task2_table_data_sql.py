@@ -20,7 +20,7 @@ calls completely. Use supplied example.sqlite file as database fixture file.
 """
 
 import sqlite3
-from typing import Callable, Iterator, Mapping
+from typing import Iterator, Mapping
 
 
 class TableData(Mapping):
@@ -37,29 +37,18 @@ class TableData(Mapping):
         self.connection.cursor().close()
         self.connection.close()
 
-    def execute_query(self, query: str, query_args: tuple, fetch: Callable):
-        return fetch(self.cursor.execute(query.format(*query_args)))
-
     def __len__(self) -> int:
-        return self.execute_query(
-            "SELECT count(*) FROM '{}'",
-            (self.table_name,),
-            lambda cursor: cursor.fetchone()[0],
-        )
+        return self.cursor.execute(
+            f"SELECT count(*) FROM '{self.table_name}'"
+        ).fetchone()[0]
 
     def __getitem__(self, item: str) -> tuple:
-        execution = self.execute_query(
-            "SELECT * FROM '{}' WHERE name = '{}'",
-            (self.table_name, item),
-            lambda cursor: cursor.fetchone(),
-        )
+        execution = self.cursor.execute(
+            f"SELECT * FROM '{self.table_name}' WHERE name = '{item}'"
+        ).fetchone()
         if not execution:
             raise KeyError
         return execution
 
     def __iter__(self) -> Iterator:
-        return self.execute_query(
-            "SELECT * FROM '{}'",
-            (self.table_name,),
-            lambda cursor: iter(cursor.fetchall()),
-        )
+        return iter(self.cursor.execute(f"SELECT * FROM '{self.table_name}'"))

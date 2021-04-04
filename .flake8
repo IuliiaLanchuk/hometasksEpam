@@ -11,6 +11,7 @@ ignore = E203, E501, W503,  # handled by black
          S303,
          S311,
          T001
+         S608
 
 exclude =
     *_venv
