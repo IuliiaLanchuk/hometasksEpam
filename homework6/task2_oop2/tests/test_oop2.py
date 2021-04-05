@@ -59,7 +59,7 @@ def test_homework_result_constructor_raises_an_error_on_wrong_argument_type():
         ).homework
 
 
-def test_teacher_check_homework_with_length_more_than_5_result_in_add_in_homework_done_data_structure():
+def test_check_homework_saves_result_to_homework_done():
     good_student = Student("Lev", "Sokolov")
     opp_teacher = Teacher("Daniil", "Shadrin")
     oop_hw = opp_teacher.create_homework("Learn OOP", 2)

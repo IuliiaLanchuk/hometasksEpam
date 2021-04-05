@@ -44,7 +44,6 @@ PEP8 соблюдать строго.
 """
 import datetime
 from collections import defaultdict
-from typing import Any
 
 
 class Homework:
@@ -78,7 +77,7 @@ class Person:
 class Student(Person):
     """Create Student object."""
 
-    def do_homework(self, home_work: Homework, result: str) -> Any:
+    def do_homework(self, home_work: Homework, result: str) -> "HomeworkResult":
         """Checks is the deadline of the given homework expired or not.
 
         Return HomeworkResult class object if deadline hasn't expired yet, otherwise raise DeadlineError.
@@ -144,6 +143,6 @@ class Teacher(Person):
         Otherwise, it removes only results of a given homework.
         """
         if homework:
-            Teacher.homework_done[homework.text].clear()
+            del Teacher.homework_done[homework.text]
         else:
             Teacher.homework_done.clear()
