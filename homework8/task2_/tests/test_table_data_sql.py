@@ -1,7 +1,7 @@
 import os
 
 import pytest
-from project2_.task2_table_data_sql import TableData
+from project2_sql.task2_table_data_sql import TableData
 
 
 @pytest.fixture()
