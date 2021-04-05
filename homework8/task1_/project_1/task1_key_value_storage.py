@@ -32,26 +32,22 @@ class KeyValueStorage:
             )
         if not key.isidentifier():
             raise ValueError("This name cannot be assigned as an attribute name")
-        return key
 
     def __init__(self, path: str):
-        self.__path = path
-        with open(self.__path, "r") as f:
+        self._storage = {}
+
+        with open(path, "r") as f:
             for line in f:
                 key, value = line.rstrip().split("=")
                 self.check_key(key)
                 if value.isdigit():
                     value = int(value)
-                self.__dict__[key] = value
-
-    def __setattr__(self, name, value):
-        object.__setattr__(self, name, value)
+                self._storage[key] = value
 
     def __getattr__(self, item):
-        return self.__dict__[item]
-
-    def __setitem__(self, item, value) -> None:
-        self.__dict__[item] = value
+        if item in self._storage:
+            return self._storage[item]
+        return self.__getattribute__(item)
 
     def __getitem__(self, item):
-        return self.__dict__[item]
+        return self._storage[item]
