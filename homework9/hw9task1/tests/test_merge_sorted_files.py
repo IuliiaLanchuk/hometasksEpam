@@ -26,5 +26,8 @@ def test_merge_two_files_with_repeated_numbers():
     ]
 
 
-def test_merge_two_empty_files():
-    assert list(merge_sorted_files([path + "/file6.txt", path + "/file7.txt"])) == []
+def test_merge_two_files_where_one_fail_is_empty():
+    assert list(merge_sorted_files([path + "/file1.txt", path + "/file6.txt"])) == [
+        1,
+        3,
+    ]
