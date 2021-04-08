@@ -20,7 +20,7 @@ def universal_file_counter(
     amount_of_tokens_or_lines = 0
     all_files = [file for file in os.listdir(dir_path) if file.endswith(file_extension)]
     for file_name in all_files:
-        file_path = str(dir_path) + "\\" + file_name
+        file_path = str(dir_path) + "/" + file_name
         if getsize(file_path) != 0:
             with open(file_path, "r") as file:
                 if not tokenizer:
