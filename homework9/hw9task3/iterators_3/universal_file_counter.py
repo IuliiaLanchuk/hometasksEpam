@@ -20,10 +20,10 @@ def universal_file_counter(
     amount_of_tokens_or_lines = 0
     all_files = [file for file in os.listdir(dir_path) if file.endswith(file_extension)]
     for file_name in all_files:
-        file_path = Path(dir_path) / file_name
+        file_path = dir_path / file_name
         if tokenizer and getsize(file_path) != 0:
             all_data = file_path.read_text()
-            amount_of_tokens_or_lines += sum(1 for item in tokenizer(all_data))
+            amount_of_tokens_or_lines += len(tokenizer(all_data))
         else:
             with open(file_path, "r") as file:
                 amount_of_tokens_or_lines += sum(1 for line in file)
