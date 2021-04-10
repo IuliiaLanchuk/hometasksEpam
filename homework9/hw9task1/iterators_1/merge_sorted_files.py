@@ -15,33 +15,30 @@ from pathlib import Path
 from typing import Iterator, List, Union
 
 
-def sorting_data(iter1, iter2) -> int:
+def sorting_data(*iters: Iterator):
+    temp_list = []
+    merge_list = iters[0]
+    for i in range(1, len(iters)):
+        iter2 = iters[i]
+        item1 = next(merge_list, None)
+        item2 = next(iter2, None)
+        while item2 or item1:
+            if item1 and (not item2 or item1 < item2):
+                temp_list.append(item1)
+                item1 = next(merge_list, None)
+            else:
+                temp_list.append(item2)
+                item2 = next(iter2, None)
+        merge_list = iter(temp_list[:])
+        temp_list.clear()
+    return merge_list
 
-    item1 = next(iter1, None)
-    item2 = next(iter2, None)
-    while item2 or item1:
 
-        if item1 and (not item2 or item1 < item2):
-            yield item1
-            item1 = next(iter1, None)
-        else:
-            yield item2
-            item2 = next(iter2, None)
-
-
-def fetching_data(file_path: str) -> int:
+def fetching_data(file_path: str) -> Iterator:
     with open(file_path, "r") as file:
         yield from (int(line.rstrip()) for line in file)
 
 
 def merge_sorted_files(file_list: List[Union[Path, str]]) -> Iterator:
-    file_iterator = iter(file_list)
-    file_1 = next(file_iterator)
-    all_data = fetching_data(file_1)
-
-    while (next_file := next(file_iterator, StopIteration)) != StopIteration:
-        all_data = sorting_data(
-            (i for i in all_data), (i for i in fetching_data(next_file))
-        )
-
-    yield from all_data
+    all_data = (fetching_data(file) for file in file_list)
+    return sorting_data(*all_data)
