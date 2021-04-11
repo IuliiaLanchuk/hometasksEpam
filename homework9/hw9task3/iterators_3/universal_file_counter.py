@@ -23,8 +23,7 @@ def universal_file_counter(
         file_path = dir_path / file_name
         if getsize(file_path) != 0:
             all_data = file_path.read_text()
-            if tokenizer:
-                amount_of_tokens_or_lines += len(tokenizer(all_data))
-            else:
-                amount_of_tokens_or_lines += all_data.count("\n")
+            amount_of_tokens_or_lines += (
+                len(tokenizer(all_data)) if tokenizer else all_data.count("\n")
+            )
     return amount_of_tokens_or_lines
