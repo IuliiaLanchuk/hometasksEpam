@@ -11,7 +11,7 @@ def test_universal_file_counter_with_tokenizer_data_split_by_space():
 
 
 def test_universal_file_counter_without_tokenizer():
-    assert universal_file_counter(path, "txt") == 8
+    assert universal_file_counter(path, "txt") == 10
 
 
 def test_universal_file_counter_with_tokenizer_data_split_by_symbol():

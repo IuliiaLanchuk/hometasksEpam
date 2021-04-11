@@ -15,7 +15,9 @@ from typing import Callable, Optional
 
 
 def universal_file_counter(
-    dir_path: Path, file_extension: str, tokenizer: Optional[Callable] = None
+    dir_path: Path,
+    file_extension: str,
+    tokenizer: Optional[Callable] = lambda data: data.split("\n"),
 ) -> int:
     amount_of_tokens_or_lines = 0
     all_files = [file for file in os.listdir(dir_path) if file.endswith(file_extension)]
@@ -23,7 +25,5 @@ def universal_file_counter(
         file_path = dir_path / file_name
         if getsize(file_path) != 0:
             all_data = file_path.read_text()
-            amount_of_tokens_or_lines += (
-                len(tokenizer(all_data)) if tokenizer else all_data.count("\n")
-            )
+            amount_of_tokens_or_lines += len(tokenizer(all_data))
     return amount_of_tokens_or_lines
