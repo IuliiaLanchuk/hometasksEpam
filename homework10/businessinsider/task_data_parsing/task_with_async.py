@@ -102,7 +102,6 @@ async def get_company_full_info(company_name_href_growth, current_dollar_value) 
         "growth": company_name_href_growth["growth"],
         "potential_profit": get_potential_profit(soup),
     }
-    print(one_company_full_data)
     return one_company_full_data
 
 
