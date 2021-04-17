@@ -1,6 +1,7 @@
 """
 Vasya implemented nonoptimal Enum classes.
 Remove duplications in variables declarations using metaclasses.
+
 from enum import Enum
 class ColorsEnum(Enum):
     RED = "RED"
@@ -21,3 +22,12 @@ class SizesEnum(metaclass=SimplifiedEnum):
 assert ColorsEnum.RED == "RED"
 assert SizesEnum.XL == "XL"
 """
+
+
+class SimplifiedEnum(type):
+    def __new__(cls, future_class_name, future_class_parents, future_class_attr):
+        attrs = [
+            value for key, value in future_class_attr.items() if key.endswith("__keys")
+        ]
+        new_attrs = {item: item for item in attrs[0]}
+        return type.__new__(cls, future_class_name, future_class_parents, new_attrs)
