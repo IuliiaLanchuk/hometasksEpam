@@ -43,12 +43,9 @@ async def get_current_dollar_value() -> float:
 
 def get_value_with_reg_exp(value, soup) -> Union[float, None]:
     pattern = r"([0-9]*\.[0-9]*)\r\n.*" + value
-    try:
-        value = float(re.findall(pattern, str(soup))[0].replace(",", ""))
-    except IndexError:
-        pass
-    else:
-        return value
+    request = re.findall(pattern, str(soup))
+    if len(request) != 0:
+        return float(request[0].replace(",", ""))
 
 
 def get_potential_profit(soup) -> Union[float, None]:
