@@ -19,3 +19,25 @@ assert order_1.final_price() == 50
 order_2 = Order(100, elder_discount)
 assert order_1.final_price() == 10
 """
+from typing import Callable
+
+
+class Order:
+    def __init__(self, price: float, discount_strategy: Callable = None):
+        self.price = price
+        self.discount_strategy = discount_strategy if discount_strategy else no_discount
+
+    def final_price(self) -> float:
+        return self.discount_strategy(self)
+
+
+def morning_discount(order):
+    return order.price - order.price * 0.5
+
+
+def elder_discount(order):
+    return order.price - order.price * 0.9
+
+
+def no_discount(order):
+    return float(order.price)
