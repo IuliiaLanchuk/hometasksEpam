@@ -25,9 +25,6 @@ assert SizesEnum.XL == "XL"
 
 
 class SimplifiedEnum(type):
-    def __new__(cls, future_class_name, future_class_parents, future_class_attr):
-        attrs = [
-            value for key, value in future_class_attr.items() if key.endswith("__keys")
-        ]
-        new_attrs = {item: item for item in attrs[0]}
-        return type.__new__(cls, future_class_name, future_class_parents, new_attrs)
+    def __new__(cls, class_name, class_parents, class_attr):
+        new_attrs = {item: item for item in class_attr[f"_{class_name}__keys"]}
+        return type.__new__(cls, class_name, class_parents, new_attrs)
