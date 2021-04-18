@@ -1,4 +1,4 @@
-from task_order import Order, elder_discount, morning_discount
+from project_hw11_task2.task_order import Order, elder_discount, morning_discount
 
 
 def test_order_with_morning_discount():
