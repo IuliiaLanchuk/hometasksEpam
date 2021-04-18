@@ -102,7 +102,6 @@ async def get_company_full_info(
         "growth": company_name_href_growth["growth"],
         "potential_profit": get_potential_profit(soup),
     }
-    print(one_company_full_data)
     return one_company_full_data
 
 
@@ -152,8 +151,11 @@ async def main():
             asyncio.create_task(fetch_company_name_href_and_growth(url, session))
             for url in ten_pages
         ]
-        data_from_all_pages = await asyncio.gather(*tasks_1)
-        current_dollar_value = await get_current_dollar_value(session)
+        data_all_pages_and_dollar = await asyncio.gather(
+            *tasks_1, get_current_dollar_value(session)
+        )
+        current_dollar_value = data_all_pages_and_dollar[10]
+        data_from_all_pages = data_all_pages_and_dollar[:10]
         tasks_2 = [
             asyncio.create_task(
                 get_company_full_info(session, company, current_dollar_value)
