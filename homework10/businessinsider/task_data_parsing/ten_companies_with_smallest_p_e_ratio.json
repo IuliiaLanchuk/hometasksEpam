@@ -1,0 +1,52 @@
+[
+    {
+        "code": "AAL",
+        "name": "American Airlines",
+        "p_e_ratio": 0.81
+    },
+    {
+        "code": "UAL",
+        "name": "United Airlines",
+        "p_e_ratio": 1.59
+    },
+    {
+        "code": "DXC",
+        "name": "DXC Technology",
+        "p_e_ratio": 2.58
+    },
+    {
+        "code": "CCL",
+        "name": "Carnival",
+        "p_e_ratio": 2.76
+    },
+    {
+        "code": "NCLH",
+        "name": "Norwegian Cruise Line",
+        "p_e_ratio": 2.94
+    },
+    {
+        "code": "DAL",
+        "name": "Delta Air Lines",
+        "p_e_ratio": 3.71
+    },
+    {
+        "code": "RCL",
+        "name": "Royal Caribbean Cruises",
+        "p_e_ratio": 3.97
+    },
+    {
+        "code": "OXY",
+        "name": "Occidental Petroleum",
+        "p_e_ratio": 4.41
+    },
+    {
+        "code": "UNM",
+        "name": "Unum Group",
+        "p_e_ratio": 4.49
+    },
+    {
+        "code": "ALK",
+        "name": "Alaska Air Group",
+        "p_e_ratio": 5.1
+    }
+]

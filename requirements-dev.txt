@@ -18,3 +18,5 @@ pytest>=6.2.2
 requests
 pytest-cov>=2.10.1
 isort==5.7.0
+aiohttp
+bs4
