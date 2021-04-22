@@ -2,15 +2,6 @@ from django.db import models
 from django.utils import timezone
 
 
-class Homework(models.Model):
-    text = models.CharField(max_length=50)
-    deadline = models.DateTimeField()
-    created = models.DateTimeField(default=timezone.now)
-
-    def __str__(self):
-        return "Homework task: {}".format(self.text)
-
-
 class Person(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
@@ -29,7 +20,17 @@ class Teacher(Person):
     degree = models.CharField(max_length=30, default="professor")
 
     def __str__(self):
-        return "Teacher: {} {} {}".format(self.first_name, self.last_name, self.degree)
+        return "Teacher: {} {}".format(self.first_name, self.last_name)
+
+
+class Homework(models.Model):
+    text = models.CharField(max_length=50)
+    deadline = models.DateTimeField()
+    created = models.DateTimeField(default=timezone.now)
+    teacher_create_hw = models.ForeignKey(Teacher, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return "{}".format(self.teacher_create_hw)
 
 
 class HomeworkResult(models.Model):
@@ -39,4 +40,4 @@ class HomeworkResult(models.Model):
     created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return "HomeworkResult by {} in {}".format(self.author, self.homework)
+        return "{}, {}, {}".format(self.author, self.created, self.homework)
