@@ -1,6 +1,8 @@
 import csv
 import os
 
+import django
+
 
 def main():
     homeworks_completed = HomeworkResult.objects.all()
@@ -10,11 +12,9 @@ def main():
 
 
 if __name__ == "__main__":
-    import django
-
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_orm.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_orm.my_project.settings")
 
     django.setup()
-    from my_project.models import HomeworkResult
+    from project_orm.my_project.models import HomeworkResult
 
     main()
