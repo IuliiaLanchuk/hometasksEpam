@@ -12,9 +12,9 @@ def main():
 
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "project_orm.project_orm.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
     django.setup()
-    from project_orm.my_project.models import HomeworkResult
+    from my_project.models import HomeworkResult
 
     main()
