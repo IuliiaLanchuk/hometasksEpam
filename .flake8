@@ -12,7 +12,7 @@ ignore = E203, E501, W503,  # handled by black
          S311,
          T001,
          B007
-         S608
+         S608,
 
 exclude =
     *_venv
