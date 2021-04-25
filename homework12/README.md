@@ -14,21 +14,25 @@ To run this project:
 
 1.Copy link to this repo `git clone https://github.com/IuliiaLanchuk/hometasksEpam.git develop`
 
-2.Set up used libs in this project: `pip install -r requirements.txt`
+2.Install python and then in command line add python and pip to PATH variables:
+`setx PATH "C:\Users\User_name\AppData\Local\Programs\Python\Python39\;%PATH%"` and
+`setx PATH "C:\Users\User_name\AppData\Local\Programs\Python\Python39\Scripts\;%PATH%"`
 
-3.Download and set up SQLite on your computer. Then, in project be sure you are in the directory with file manage.py.
+3.Set up used libs in this project: `pip install -r requirements.txt`
+
+4.Download and set up SQLite on your computer. Then, in project be sure you are in the directory with file manage.py.
 Then, in terminal run command `sqlite3 db.sqlite3` to connect to database.
 Then enter `.tables` to see all tables in this database.
 Then you can use SQL queries fo fetch data from database, for example,
 `select * from <table_name>;` or others.
 Use `exit` to close database connection.
 
-4.To see all data in database you also can use `python manage.py runserver`. Be sure you are in the directory with file manage.py.
+5.To see all data in database you also can use `python manage.py runserver`. Be sure you are in the directory with file manage.py.
 In browser go to `http://127.0.0.1:8000/admin`, enter through user `admin`, password 27011996.
 
-5.In '.../my_project/migrations' directory there are all migration files
+6.In '.../university_app/migrations' directory there are all migration files
 In case you need to change models, for example, add field or delete model, do changes and then run command
 `python manage.py makemigrations`. Be sure you are in the directory with file manage.py. Finally, you need to apply this changes
  to database, so you need to run `python manage.py migrate`.
 
-6.To run standalone script (get_report.py) use command `python get_report.py`. Be sure you are in the directory with file manage.py.
+7.To run standalone script (get_report.py) use command `python get_report.py`. Be sure you are in the directory with file manage.py.

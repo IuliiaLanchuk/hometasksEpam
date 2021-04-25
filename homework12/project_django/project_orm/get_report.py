@@ -15,6 +15,6 @@ if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
     django.setup()
-    from my_project.models import HomeworkResult
+    from university_app.models import HomeworkResult
 
     main()
