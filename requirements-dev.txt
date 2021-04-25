@@ -20,4 +20,3 @@ pytest-cov>=2.10.1
 isort==5.7.0
 
 Django==3.2
-sqlparse==0.4.1

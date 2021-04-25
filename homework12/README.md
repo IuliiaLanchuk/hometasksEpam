@@ -18,7 +18,7 @@ To run this project:
 `setx PATH "C:\Users\User_name\AppData\Local\Programs\Python\Python39\;%PATH%"` and
 `setx PATH "C:\Users\User_name\AppData\Local\Programs\Python\Python39\Scripts\;%PATH%"`
 
-3.Set up used libs in this project: `pip install -r requirements.txt`
+3.Set up used libs in this project: `pip install -r requirements-dev.txt`
 
 4.Download and set up SQLite on your computer. Then, in project be sure you are in the directory with file manage.py.
 Then, in terminal run command `sqlite3 db.sqlite3` to connect to database.
